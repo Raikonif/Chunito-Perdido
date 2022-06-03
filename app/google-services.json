@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "831855780042",
+    "project_id": "chunito-perdido",
+    "storage_bucket": "chunito-perdido.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831855780042:android:a3c6d28560166ca383d433",
+        "android_client_info": {
+          "package_name": "com.dai.petsearcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831855780042-04rk4isccfpofn2kfqtmkiig99io0ql0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dai.petsearcher",
+            "certificate_hash": "29a73464397df10ba771a8ed64c6bf8609ca27d7"
+          }
+        },
+        {
+          "client_id": "831855780042-pcl074lku82smplhf9r8qggdkriai196.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDugT4fjyoKoFKVo3T7UjOFfFDeGBo5zDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831855780042-pcl074lku82smplhf9r8qggdkriai196.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
