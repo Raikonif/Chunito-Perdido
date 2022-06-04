@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dai.core.BaseViewHolder
@@ -25,7 +26,14 @@ class LatestPostsAdapter(
         override fun bind(item: Pet) {
             binding.tvName.text = item.name
             binding.tvDate.text = item.lostDate.toString()
-            Glide.with(context).load(item.photos[0]).centerCrop().into(binding.ivPhoto)
+            Glide.with(context).load(item.photo).centerCrop().into(binding.ivPhoto)
+
+            binding.ivPhoto.setOnClickListener {
+                Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
+            }
+            itemView.setOnClickListener {
+                Toast.makeText(context, "body of item pet:${item.id}", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

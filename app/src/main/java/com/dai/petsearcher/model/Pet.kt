@@ -5,7 +5,7 @@ import java.util.*
 
 data class Pet(
     var id: String,
-    var photos: MutableList<String> = mutableListOf(),
+    var photo: String,
     var name: String,
     var type: String,
     var age: Int,
