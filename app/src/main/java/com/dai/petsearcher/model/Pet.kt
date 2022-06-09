@@ -12,5 +12,6 @@ data class Pet(
     var gender: String = "Male",
     var lostDate: Date = Date(),
     var description: String,
+    var founded: Boolean = false
 //    var location: Location
 )
