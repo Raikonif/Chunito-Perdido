@@ -4,6 +4,7 @@ import android.content.ClipData
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dai.datasource.PetListDataSource
 import com.dai.petsearcher.model.Pet
 
 class LatestPostViewModel : ViewModel() {
@@ -50,6 +51,10 @@ class LatestPostViewModel : ViewModel() {
 
     fun getPetLost(): LiveData<Pet>{
         return petVariables
+    }
+    fun getPetModel(){
+        val latestPetPosts = PetListDataSource.getLatestPet()
+//        petVariables.postValue(latestPetPosts)
     }
 
 }

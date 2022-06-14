@@ -4,7 +4,7 @@ import android.location.Location
 import java.util.*
 
 data class Pet(
-    var id: String,
+    var idOwner: String,
     var photo: String,
     var name: String,
     var type: String,

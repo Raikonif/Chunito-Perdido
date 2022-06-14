@@ -32,7 +32,7 @@ class LatestPostsAdapter(
                 Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
             }
             itemView.setOnClickListener {
-                Toast.makeText(context, "body of item pet:${item.id}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "body of item pet:${item.idOwner}", Toast.LENGTH_SHORT).show()
             }
         }
     }

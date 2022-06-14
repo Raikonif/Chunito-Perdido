@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dai.datasource.PetListDataSource
 import com.dai.datasource.PetsProvider
 import com.dai.petsearcher.R
 import com.dai.petsearcher.databinding.FragmentLatestPostsBinding
@@ -28,7 +29,13 @@ class LatestPostsFragment : Fragment(R.layout.fragment_latest_posts) {
         Toast.makeText(context, "Latest Posts", Toast.LENGTH_SHORT).show()
 
         initRecyclerView()
+        initViewModel()
     }
+
+    private fun initViewModel() {
+
+    }
+
     private fun initRecyclerView(){
         binding.rvPetsLosts.layoutManager = LinearLayoutManager(context?.applicationContext)
         binding.rvPetsLosts.setHasFixedSize(true)
