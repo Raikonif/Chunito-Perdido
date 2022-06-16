@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.dai.petsearcher.databinding.FragmentPetPostBinding
 
 
-class PetPostFragment : Fragment() {
+class PetPostFragment : Fragment(R.layout.fragment_pet_post) {
     private lateinit var binding: FragmentPetPostBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

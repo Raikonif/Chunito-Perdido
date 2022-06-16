@@ -1,13 +1,66 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.dai.CreateEditPetPostFragment">
+    tools:context="com.dai.CreateEditPetPostFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tv_general_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Post Info Below" />
+
+        <ImageView
+            android:id="@+id/iv_photo_info"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:src="@tools:sample/avatars"/>
+
+        <EditText
+            android:id="@+id/et_name_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/first_names"/>
+
+        <EditText
+            android:id="@+id/et_age_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            tools:text="@tools:sample/lorem"/>
+
+        <EditText
+            android:id="@+id/et_description_info"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:text="@tools:sample/lorem/random"/>
+
+        <EditText
+            android:id="@+id/et_date_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/date/ddmmyy"/>
+
+        <EditText
+            android:id="@+id/et_type_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Dog"/>
+        <EditText
+            android:id="@+id/et_gender_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Female"/>
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload"/>
+
+    </LinearLayout>
+</layout>

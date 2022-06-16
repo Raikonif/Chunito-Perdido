@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Raikonif/AndroidStudioProjects/PetSearcher/app/src/main/res/layout/activity_main.xml" value="0.121875" />
+        <entry key="..\:/Users/Raikonif/AndroidStudioProjects/PetSearcher/app/src/main/res/layout/fragment_create_edit_pet_post.xml" value="0.26197916666666665" />
+        <entry key="..\:/Users/Raikonif/AndroidStudioProjects/PetSearcher/app/src/main/res/layout/fragment_latest_post_detail.xml" value="0.26197916666666665" />
         <entry key="..\:/Users/Raikonif/AndroidStudioProjects/PetSearcher/app/src/main/res/layout/fragment_latest_posts.xml" value="0.26197916666666665" />
         <entry key="..\:/Users/Raikonif/AndroidStudioProjects/PetSearcher/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/Users/Raikonif/AndroidStudioProjects/PetSearcher/app/src/main/res/layout/fragment_pet_post.xml" value="0.1" />
