@@ -18,5 +18,22 @@
         android:id="@+id/latestPostsFragment"
         android:name="com.dai.petsearcher.latestposts.LatestPostsFragment"
         android:label="fragment_latest_posts"
-        tools:layout="@layout/fragment_latest_posts" />
+        tools:layout="@layout/fragment_latest_posts" >
+        <action
+            android:id="@+id/action_latestPostsFragment_to_createEditPetPostFragment"
+            app:destination="@id/createEditPetPostFragment" />
+        <action
+            android:id="@+id/action_latestPostsFragment_to_petPostFragment"
+            app:destination="@id/petPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEditPetPostFragment"
+        android:name="com.dai.CreateEditPetPostFragment"
+        android:label="fragment_create_edit_pet_post"
+        tools:layout="@layout/fragment_create_edit_pet_post" />
+    <fragment
+        android:id="@+id/petPostFragment"
+        android:name="com.dai.petsearcher.PetPostFragment"
+        android:label="fragment_pet_post"
+        tools:layout="@layout/fragment_pet_post" />
 </navigation>

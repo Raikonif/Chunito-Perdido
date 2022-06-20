@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dai.datasource.PetListDataSource
 import com.dai.datasource.PetsProvider
@@ -30,6 +31,9 @@ class LatestPostsFragment : Fragment(R.layout.fragment_latest_posts) {
 
         initRecyclerView()
         initViewModel()
+        binding.btnCreatePost.setOnClickListener {
+            findNavController().navigate(R.id.action_latestPostsFragment_to_createEditPetPostFragment)
+        }
     }
 
     private fun initViewModel() {

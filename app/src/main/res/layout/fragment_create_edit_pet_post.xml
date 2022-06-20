@@ -1,7 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.dai.CreateEditPetPostFragment"
-    android:orientation="vertical">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,12 +18,13 @@
             android:id="@+id/iv_photo_info"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            tools:src="@tools:sample/avatars"/>
+            android:src="@drawable/ic_launcher_foreground"/>
 
         <EditText
             android:id="@+id/et_name_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Nombre de mascota"
             tools:text="@tools:sample/first_names"/>
 
         <EditText
@@ -31,29 +32,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:hint="Edad"
             tools:text="@tools:sample/lorem"/>
 
         <EditText
             android:id="@+id/et_description_info"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:hint="Descripción"
             tools:text="@tools:sample/lorem/random"/>
 
         <EditText
             android:id="@+id/et_date_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="fecha de perdida"
             tools:text="@tools:sample/date/ddmmyy"/>
 
         <EditText
             android:id="@+id/et_type_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Tipo de mascota"
             tools:text="Dog"/>
         <EditText
             android:id="@+id/et_gender_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="genero"
             tools:text="Female"/>
 
         <Button

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.dai.petsearcher.R
 import com.dai.petsearcher.databinding.FragmentCreateEditPetPostBinding
@@ -31,7 +32,7 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
             val petName = binding.etNameInfo.text.toString()
             val petAge = binding.etAgeInfo.text.toString().toInt()
             binding.ivPhotoInfo.setOnClickListener {
-
+                Toast.makeText(context, "Please select a photo", Toast.LENGTH_SHORT).show()
             }
         }
     }
