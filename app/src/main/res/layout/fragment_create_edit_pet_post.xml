@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:text="Create Post Info Below" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_photo_info"
             android:layout_width="match_parent"
             android:layout_height="200dp"
