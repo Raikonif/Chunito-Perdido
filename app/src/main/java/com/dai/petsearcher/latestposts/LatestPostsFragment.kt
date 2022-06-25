@@ -2,6 +2,7 @@ package com.dai.petsearcher.latestposts
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ class LatestPostsFragment : Fragment(R.layout.fragment_latest_posts) {
         initRecyclerView()
         initViewModel()
         binding.btnCreatePost.setOnClickListener {
+            Toast.makeText(context,"Create Post", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_latestPostsFragment_to_createEditPetPostFragment)
         }
     }
@@ -43,6 +45,6 @@ class LatestPostsFragment : Fragment(R.layout.fragment_latest_posts) {
     private fun initRecyclerView(){
         binding.rvPetsLosts.layoutManager = LinearLayoutManager(context?.applicationContext)
         binding.rvPetsLosts.setHasFixedSize(true)
-        binding.rvPetsLosts.adapter = LatestPostsAdapter(PetsProvider.petsList, 1)
+        binding.rvPetsLosts.adapter = LatestPostsAdapter(PetListDataSource.getLatestPet(), 1)
     }
 }

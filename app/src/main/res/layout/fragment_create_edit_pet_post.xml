@@ -17,7 +17,7 @@
         <ImageButton
             android:id="@+id/iv_photo_info"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:src="@drawable/ic_launcher_foreground"/>
 
         <EditText
@@ -39,6 +39,7 @@
             android:id="@+id/et_description_info"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:inputType="textPersonName"
             android:hint="Descripción"
             tools:text="@tools:sample/lorem/random"/>
 
@@ -46,6 +47,7 @@
             android:id="@+id/et_date_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPersonName"
             android:hint="fecha de perdida"
             tools:text="@tools:sample/date/ddmmyy"/>
 
@@ -54,11 +56,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tipo de mascota"
+            android:inputType="textPersonName"
             tools:text="Dog"/>
         <EditText
             android:id="@+id/et_gender_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPersonName"
             android:hint="genero"
             tools:text="Female"/>
 
@@ -66,6 +70,7 @@
             android:id="@+id/btn_upload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPersonName"
             android:text="Upload"/>
 
     </LinearLayout>
