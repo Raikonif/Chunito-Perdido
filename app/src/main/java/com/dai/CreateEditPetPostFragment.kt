@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.nfc.Tag
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -62,28 +63,7 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
         val petDescription = binding.etDescriptionInfo.text.toString()
         val petFounded = false
 
-
-        //TODO: upload to firebase, image must be updated
-        user?.let {
-            it.displayName?.let {
-                Firebase.firestore.collection("homePosts")
-                    .add(
-                        Pet(
-                            petIdOwner,
-                            downloadUrl,
-                            petName,
-                            petType,
-                            petAge,
-                            petGender,
-//                            petLostDate,
-                            petDescription,
-                            petFounded,
-                            Timestamp.now()
-                        )
-                    )
-            }
-        }
-        updateToMyOwnPosts(Pet(
+        val petWithVariables = Pet(
             petIdOwner,
             downloadUrl,
             petName,
@@ -94,14 +74,57 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
             petDescription,
             petFounded,
             Timestamp.now()
-        ))
+        )
+
+        if (theModelIsNotEmpty(
+                petIdOwner,
+                downloadUrl,
+                petName,
+                petType,
+                petAge,
+                petGender,
+                petDescription
+            )
+        ) {
+            //TODO: upload to firebase, image must be updated
+            user?.let {
+                it.displayName?.let {
+                    Firebase.firestore.collection("homePosts")
+                        .add(
+                            petWithVariables
+                        )
+                }
+            }
+            updateToMyOwnPosts(petWithVariables)
+
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Need Fill All the Spaces for upload the information",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun updateToMyOwnPosts(pet: Pet) {
+        auth.currentUser?.displayName.let {
+            Firebase.firestore.collection("ownPosts")
+                .document(auth.currentUser!!.uid).collection("myPetLost").add(pet)
+        }
 
     }
 
-    private fun updateToMyOwnPosts(pet: Pet){
-       auth.currentUser?.displayName.let { Firebase.firestore.collection("ownPosts")
-           .document(auth.currentUser!!.uid).collection("myPetLost").add(pet) }
-
+    private fun theModelIsNotEmpty(
+        idOwner: String,
+        downloadUrl: String,
+        name: String,
+        type: String,
+        age: Int,
+        gender: String,
+        description: String,
+    ): Boolean {
+        return (idOwner.isNotEmpty() && downloadUrl.isNotEmpty() && name.isNotEmpty() && type.isNotEmpty() && age.toString()
+            .isNotEmpty() && gender.isNotEmpty() && description.isNotEmpty())
     }
 
     private fun selectPhoto() {
@@ -123,10 +146,9 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
 
     private fun uploadInfoToFirebase() {
         uploadPhotoToFirebaseStorage()
-//            createLostPet("")
     }
 
-    private fun uploadPhotoToFirebaseStorage(){
+    private fun uploadPhotoToFirebaseStorage() {
         if (selectedPhotoUri == null) return
         val randomName = UUID.randomUUID().toString()
         val uid = auth.currentUser?.uid
@@ -135,14 +157,22 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
 //        val data = baos.toByteArray()
 //        selectedPhotoUri!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val uploadTask = storageRef.putFile(selectedPhotoUri!!)
-
+        val downloadUrl =
+            storageRef.putFile(selectedPhotoUri!!).snapshot.storage.downloadUrl.toString()
         uploadTask.addOnSuccessListener { task ->
             Log.d(TAG, "Image uploaded successfully!!: ${task.metadata?.path}")
 
-           storageRef.downloadUrl.addOnSuccessListener { uri ->
+            storageRef.downloadUrl.addOnSuccessListener { uri ->
+                Log.d(TAG, "Image URL downloaded Successfully")
                 createLostPet(uri.toString())
+                return@addOnSuccessListener
             }
-        }.addOnFailureListener { Toast.makeText(requireContext(), "Not Uploaded", Toast.LENGTH_SHORT).show() }
-//        return uploadTask.snapshot.storage.downloadUrl.toString()
+        }.addOnFailureListener {
+            Toast.makeText(
+                requireContext(),
+                "Not Uploaded",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }
