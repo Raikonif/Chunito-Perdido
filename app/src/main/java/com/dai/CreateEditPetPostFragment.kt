@@ -18,23 +18,21 @@ import com.bumptech.glide.Glide
 import com.dai.petsearcher.R
 import com.dai.petsearcher.databinding.FragmentCreateEditPetPostBinding
 import com.dai.petsearcher.model.Pet
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
-import java.security.Timestamp
-import java.text.SimpleDateFormat
 import java.util.*
 
 class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_post) {
 
     private lateinit var binding: FragmentCreateEditPetPostBinding
-    private var bitmap: Bitmap? = null
-    private var randomName = UUID.randomUUID().toString()
     private val auth: FirebaseAuth by lazy { Firebase.auth }
-    private var selectedPhotoBitmap: Bitmap? = null
+    private var selectedPhotoUri: Uri? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCreateEditPetPostBinding.bind(view)
@@ -50,9 +48,7 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
     }
 
     private fun createLostPet(downloadUrl: String) {
-        val context = requireContext()
         val user = auth.currentUser
-
 //        val imageRef = Firebase.storage.reference.child("images/petLost/${user?.uid}/$randomName")
 //        val baos = ByteArrayOutputStream()
 //        bitmap?.let { it.compress(Bitmap.CompressFormat.JPEG, 100, baos) }
@@ -79,15 +75,33 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
                             petType,
                             petAge,
                             petGender,
-                            petLostDate,
+//                            petLostDate,
                             petDescription,
-                            petFounded
+                            petFounded,
+                            Timestamp.now()
                         )
                     )
-                Firebase.firestore.collection("ownPosts")
-                    .document(user.uid).collection("myPetLost")
             }
         }
+        updateToMyOwnPosts(Pet(
+            petIdOwner,
+            downloadUrl,
+            petName,
+            petType,
+            petAge,
+            petGender,
+//          petLostDate,
+            petDescription,
+            petFounded,
+            Timestamp.now()
+        ))
+
+    }
+
+    private fun updateToMyOwnPosts(pet: Pet){
+       auth.currentUser?.displayName.let { Firebase.firestore.collection("ownPosts")
+           .document(auth.currentUser!!.uid).collection("myPetLost").add(pet) }
+
     }
 
     private fun selectPhoto() {
@@ -101,29 +115,34 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             // proceed and check what the selected image was....
             Log.d(TAG, "Photo was selected")
-            val imageBitmap = data.extras?.get("data") as Bitmap
-            binding.ivPhotoInfo.setImageBitmap(imageBitmap)
-            selectedPhotoBitmap = imageBitmap
-            binding.ivPhotoInfo.setImageBitmap(selectedPhotoBitmap)
+            selectedPhotoUri = data.data
+//            binding.ivPhotoInfo.setImageBitmap(imageBitmap)
+            binding.ivPhotoInfo.setImageURI(selectedPhotoUri)
         }
     }
 
     private fun uploadInfoToFirebase() {
         uploadPhotoToFirebaseStorage()
-
+//            createLostPet("")
     }
 
     private fun uploadPhotoToFirebaseStorage(){
-        if (selectedPhotoBitmap == null) return
+        if (selectedPhotoUri == null) return
+        val randomName = UUID.randomUUID().toString()
+        val uid = auth.currentUser?.uid
+        val storageRef = Firebase.storage.reference.child("images/petLost/$uid/$randomName")
+//        val baos = ByteArrayOutputStream()
+//        val data = baos.toByteArray()
+//        selectedPhotoUri!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val uploadTask = storageRef.putFile(selectedPhotoUri!!)
 
-        val ref = Firebase.storage.reference.child("images/petLost/${auth.uid}/$randomName")
-        val baos = ByteArrayOutputStream()
+        uploadTask.addOnSuccessListener { task ->
+            Log.d(TAG, "Image uploaded successfully!!: ${task.metadata?.path}")
 
-        selectedPhotoBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        ref.putBytes(baos.toByteArray()).addOnSuccessListener {
-            ref.downloadUrl.addOnSuccessListener { bitmap ->
-                createLostPet(bitmap.toString())
+           storageRef.downloadUrl.addOnSuccessListener { uri ->
+                createLostPet(uri.toString())
             }
-        }
+        }.addOnFailureListener { Toast.makeText(requireContext(), "Not Uploaded", Toast.LENGTH_SHORT).show() }
+//        return uploadTask.snapshot.storage.downloadUrl.toString()
     }
 }

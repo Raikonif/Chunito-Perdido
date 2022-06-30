@@ -13,8 +13,9 @@ class PetsProvider {
                 "Dog",
                 2,
                 "Male",
-                "15:00 13/06/2022",
                 "Lost in La Paz City",
+                false,
+
 
                 ),
             Pet(
@@ -24,8 +25,8 @@ class PetsProvider {
                 "Dog",
                 2,
                 "Male",
-                "15:00 13/06/2022",
                 "Lost in La Paz City",
+                false
             )
         )
     }

@@ -25,7 +25,7 @@ class LatestPostsAdapter(
 
         override fun bind(item: Pet) {
             binding.tvName.text = item.name
-            binding.tvDate.text = item.lostDate.toString()
+//            binding.tvDate.text = item.lostDate
             Glide.with(context).load(item.photo).centerCrop().into(binding.ivPhoto)
 
             binding.ivPhoto.setOnClickListener {
