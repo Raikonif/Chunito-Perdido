@@ -6,26 +6,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="15dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_general_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Post Info Below" />
+            android:text="Create Post Info Below"
+            android:layout_marginBottom="5dp"/>
 
         <ImageButton
             android:id="@+id/iv_photo_info"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@drawable/ic_launcher_foreground"/>
+            android:layout_height="200dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:layout_marginBottom="5dp"/>
 
         <EditText
             android:id="@+id/et_name_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre de mascota"
-            tools:text="@tools:sample/first_names"/>
+            tools:text="@tools:sample/first_names"
+            android:layout_marginBottom="5dp"/>
 
         <EditText
             android:id="@+id/et_age_info"
@@ -33,15 +37,18 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="Edad"
-            tools:text="@tools:sample/lorem"/>
+            tools:text="@tools:sample/lorem"
+            android:layout_marginBottom="5dp"/>
 
         <EditText
             android:id="@+id/et_description_info"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:maxLines="5"
             android:hint="Descripción"
-            tools:text="@tools:sample/lorem/random"/>
+            tools:text="@tools:sample/lorem/random"
+            android:layout_marginBottom="5dp"/>
 
         <EditText
             android:id="@+id/et_date_info"
@@ -49,7 +56,8 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:hint="fecha de perdida"
-            tools:text="@tools:sample/date/ddmmyy"/>
+            tools:text="@tools:sample/date/ddmmyy"
+            android:layout_marginBottom="5dp"/>
 
         <EditText
             android:id="@+id/et_type_info"
@@ -57,14 +65,16 @@
             android:layout_height="wrap_content"
             android:hint="Tipo de mascota"
             android:inputType="textPersonName"
-            tools:text="Dog"/>
+            tools:text="Dog"
+            android:layout_marginBottom="5dp"/>
         <EditText
             android:id="@+id/et_gender_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:hint="genero"
-            tools:text="Female"/>
+            tools:text="Female"
+            android:layout_marginBottom="5dp"/>
 
         <Button
             android:id="@+id/btn_upload"
@@ -72,6 +82,10 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text="Upload"/>
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            style="?attr/materialButtonOutlinedStyle"/>
     </LinearLayout>
 </layout>

@@ -43,8 +43,22 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
             selectPhoto()
         }
         binding.btnUpload.setOnClickListener {
-            Toast.makeText(context, "Information Uploaded", Toast.LENGTH_SHORT).show()
-            uploadInfoToFirebase()
+            if (theModelIsEmpty(
+                    binding.etNameInfo.text.toString(),
+                    binding.etTypeInfo.text.toString(),
+                    binding.etAgeInfo.text.toString(),
+                    binding.etGenderInfo.text.toString(),
+                    binding.etDescriptionInfo.text.toString()
+                )
+            ) Toast.makeText(
+                requireContext(),
+                "Fill all Information required above",
+                Toast.LENGTH_SHORT
+            ).show()
+            else {
+                Toast.makeText(context, "Information Uploaded", Toast.LENGTH_SHORT).show()
+                uploadInfoToFirebase()
+            }
         }
     }
 
@@ -76,34 +90,15 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
             Timestamp.now()
         )
 
-        if (theModelIsNotEmpty(
-                petIdOwner,
-                downloadUrl,
-                petName,
-                petType,
-                petAge,
-                petGender,
-                petDescription
-            )
-        ) {
-            //TODO: upload to firebase, image must be updated
-            user?.let {
-                it.displayName?.let {
-                    Firebase.firestore.collection("homePosts")
-                        .add(
-                            petWithVariables
-                        )
-                }
+        //TODO: upload to firebase, image must be updated
+        user?.let {
+            it.displayName?.let {
+                Firebase.firestore.collection("homePosts").add(petWithVariables)
+                Firebase.firestore.collection("ownPosts").document(auth.currentUser!!.uid)
+                    .collection("myPetLost").add(petWithVariables)
             }
-            updateToMyOwnPosts(petWithVariables)
-
-        } else {
-            Toast.makeText(
-                requireContext(),
-                "Need Fill All the Spaces for upload the information",
-                Toast.LENGTH_SHORT
-            ).show()
         }
+//        updateToMyOwnPosts(petWithVariables)
     }
 
     private fun updateToMyOwnPosts(pet: Pet) {
@@ -114,17 +109,14 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
 
     }
 
-    private fun theModelIsNotEmpty(
-        idOwner: String,
-        downloadUrl: String,
+    private fun theModelIsEmpty(
         name: String,
         type: String,
-        age: Int,
+        age: String,
         gender: String,
         description: String,
     ): Boolean {
-        return (idOwner.isNotEmpty() && downloadUrl.isNotEmpty() && name.isNotEmpty() && type.isNotEmpty() && age.toString()
-            .isNotEmpty() && gender.isNotEmpty() && description.isNotEmpty())
+        return (name == "" || type == "" || age == "" || gender == "" || description == "")
     }
 
     private fun selectPhoto() {
