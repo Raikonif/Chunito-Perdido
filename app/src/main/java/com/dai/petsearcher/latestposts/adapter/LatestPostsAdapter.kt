@@ -8,14 +8,17 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dai.core.BaseViewHolder
+import com.dai.petsearcher.R
 import com.dai.petsearcher.databinding.ItemPostBinding
 import com.dai.petsearcher.model.Pet
 
+
 class LatestPostsAdapter(
     private val listLostPetPost: List<Pet>,
-    private val layout: Int,
+    val layout: Int,
 //    private val itemClickListener: OnPetClickListener
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
+
 
     //TODO: ADD CODE TO ADAPTER
     private inner class PetsLostListViewHolder(
@@ -34,6 +37,7 @@ class LatestPostsAdapter(
             itemView.setOnClickListener {
                 Toast.makeText(context, "body of item pet:${item.idOwner}", Toast.LENGTH_SHORT).show()
             }
+
         }
     }
 
@@ -56,3 +60,4 @@ class LatestPostsAdapter(
 
     override fun getItemCount(): Int = listLostPetPost.size
 }
+

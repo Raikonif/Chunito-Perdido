@@ -53,7 +53,7 @@ class LatestPostViewModel : ViewModel() {
         return petVariables
     }
     fun getPetModel(){
-        val latestPetPosts = PetListDataSource.getLatestPet()
+//        val latestPetPosts = PetListDataSource.getLatestPet()
 //        petVariables.postValue(latestPetPosts)
     }
 
