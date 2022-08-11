@@ -42,6 +42,7 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
             Toast.makeText(context, "Please select a photo", Toast.LENGTH_SHORT).show()
             selectPhoto()
         }
+
         binding.btnUpload.setOnClickListener {
             if (theModelIsEmpty(
                     binding.etNameInfo.text.toString(),
@@ -101,13 +102,6 @@ class CreateEditPetPostFragment : Fragment(R.layout.fragment_create_edit_pet_pos
 //        updateToMyOwnPosts(petWithVariables)
     }
 
-    private fun updateToMyOwnPosts(pet: Pet) {
-        auth.currentUser?.displayName.let {
-            Firebase.firestore.collection("ownPosts")
-                .document(auth.currentUser!!.uid).collection("myPetLost").add(pet)
-        }
-
-    }
 
     private fun theModelIsEmpty(
         name: String,

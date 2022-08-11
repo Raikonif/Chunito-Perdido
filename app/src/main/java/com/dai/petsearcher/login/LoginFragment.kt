@@ -116,8 +116,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        var currentUser = auth.getCurrentUser()
-        updateUI(currentUser);
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            val action = LoginFragmentDirections.actionLoginFragmentToLatestPostsFragment()
+            findNavController().navigate(action)
+        }
     }
 
     companion object {
